@@ -5,13 +5,12 @@ export default async function FeaturesPage({
 }: {
   params: { locale: string };
 }) {
-  console.log('=======', params.locale)
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_URL}/api/features?locale=${params.locale}&depth=2`,
-    {
-      cache: "no-store",
-    }
-  );
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_CMS_URL}/api/features?locale=${params.locale}&depth=2`,
+        {
+            cache: "no-store",
+        }
+    );
 
   const data = await res.json();
 

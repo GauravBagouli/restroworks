@@ -1,8 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 
 export default function FeatureList({ block, locale }: { block: any, locale: string; }) {
-  console.log('locale', locale)
   if (!block.features?.length) return null;
 
   return (

@@ -13,10 +13,10 @@ export default function TestimonialList({ block }: { block: any }) {
           {block.testimonials.map((t: any, i: number) => (
             <div
               key={i}
-              className="p-8 bg-white rounded-xl shadow-md text-left"
+              className="p-8 bg-white rounded-xl shadow-md flex flex-col gap-4 text-left"
             >
               <p className="text-gray-700 italic">“{t.quote}”</p>
-              <div className="flex items-center mt-6">
+              <div className="flex items-center mt-auto">
                 {t.avatar?.url && (
                   <Image
                     src={t.avatar.url}

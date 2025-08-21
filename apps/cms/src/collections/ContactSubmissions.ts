@@ -4,7 +4,7 @@ const ContactSubmissions: CollectionConfig = {
   slug: "contact-submissions",
   admin: { useAsTitle: "email" },
   access: {
-    read: () => true,
+    read: ({ req }) => req.user?.role === 'admin',
     update: () => false,
     delete: () => false,
     create: () => true,

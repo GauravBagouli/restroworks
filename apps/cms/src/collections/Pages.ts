@@ -13,7 +13,7 @@ const Pages: CollectionConfig = {
   access: { read: () => true },
   fields: [
     { name: 'title', type: 'text', required: true, localized: true },
-    { name: 'slug', type: 'text', required: true, unique: true },
+    { name: 'slug', type: 'text', required: true, unique: true, localized: true, },
     {
       name: 'content',
       type: 'richText',
@@ -32,6 +32,8 @@ const Pages: CollectionConfig = {
       fields: [
         { name: 'metaTitle', type: 'text', required: true, localized: true },
         { name: 'metaDescription', type: 'textarea', localized: true },
+        { name: 'metaKeywords', type: 'text', localized: true },
+        { name: 'openGraphImage', type: 'upload', relationTo: 'media' },
       ],
     },
   ],

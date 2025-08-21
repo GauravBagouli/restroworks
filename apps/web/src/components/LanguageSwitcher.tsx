@@ -3,7 +3,6 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState, useRef, useEffect } from "react";
 import { LOCALES, type Locale, isLocale } from "@/i18n/config";
-console.log("LOCALES", LOCALES);
 
 const FLAG: Record<Locale, string> = {
   en: "🇺🇸",

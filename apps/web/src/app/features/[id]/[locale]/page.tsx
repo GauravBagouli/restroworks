@@ -1,23 +1,72 @@
 import Image from "next/image";
 import RichTextRenderer from "@/components/RichText";
 import Link from "next/link";
+import { isLocale, DEFAULT_LOCALE, LOCALES, type Locale } from "@/i18n/config";
+import type { Metadata } from "next";
+
+const CMS = process.env.NEXT_PUBLIC_CMS_URL;
+
+async function getFeature(id: string, locale: Locale) {
+  const res = await fetch(
+    `${CMS}/api/features/${id}?locale=${locale}&depth=2`,
+    { cache: "no-store" }
+  );
+
+  if (!res.ok) {
+    console.error("CMS fetch failed:", res.status);
+    return null;
+  }
+
+  return res.json();
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string; locale: string };
+}): Promise<Metadata> {
+  const { id, locale: rawLocale } = params;
+  const locale = isLocale(rawLocale) ? (rawLocale as Locale) : DEFAULT_LOCALE;
+
+  const feature = await getFeature(id, locale);
+
+  if (!feature) {
+    return {
+      title: "404 - Feature Not Found",
+      description: "The feature you are looking for does not exist.",
+    };
+  }
+
+  const languages: Record<string, string> = {};
+  LOCALES.forEach((loc) => {
+    languages[loc] = `/feature/${id}/${loc}`;
+  });
+
+  return {
+    title: feature.metaTitle || feature.title,
+    description: feature.metaDescription || feature.description || "",
+    openGraph: {
+      title: feature.metaTitle || feature.title,
+      description: feature.metaDescription || feature.description || "",
+      images: feature.metaImage ? [{ url: feature.metaImage.url }] : [],
+    },
+    alternates: {
+      canonical: `/feature/${id}/${locale}`,
+      languages,
+    },
+  };
+}
 
 export default async function FeatureDetail({
   params,
 }: {
   params: { id: string, locale: string };
 }) {
-  console.log('params', params.locale)
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_URL}/api/features/${params.id}?locale=${params.locale}&depth=2`,
-    { cache: "no-store" }
-  );
+    const { id, locale: rawLocale } = params;
+    const locale = isLocale(rawLocale) ? (rawLocale as Locale) : DEFAULT_LOCALE;
+    const feature = await getFeature(id, locale);
 
-  if (!res.ok) {
-    return <h1 className="text-center py-20">Feature not found</h1>;
-  }
-
-  const feature = await res.json();
+    if (!feature) return <h1 className="py-16 text-center">404 - Feature Not Found</h1>;
 
   return (
     <main className="max-w-4xl mx-auto py-16 px-6 text-gray-800 bg-gray-50">

@@ -240,6 +240,8 @@ export interface Page {
   seo: {
     metaTitle: string;
     metaDescription?: string | null;
+    metaKeywords?: string | null;
+    openGraphImage?: (string | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -478,6 +480,8 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         metaTitle?: T;
         metaDescription?: T;
+        metaKeywords?: T;
+        openGraphImage?: T;
       };
   updatedAt?: T;
   createdAt?: T;

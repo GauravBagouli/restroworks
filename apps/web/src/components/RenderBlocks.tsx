@@ -10,13 +10,13 @@ const blockComponents: Record<string, any> = {
   cta: CTA,
 };
 
-export default function RenderBlocks({ layout }: { layout: any[] }) {
+export default function RenderBlocks({ layout, locale }: { layout: any[], locale: string }) {
   return (
     <>
       {layout?.map((block, i) => {
         const Block = blockComponents[block.blockType];
         if (!Block) return null;
-        return <Block key={block.id || i} block={block} />;
+        return <Block key={block.id || i} block={block} locale={locale} />;
       })}
     </>
   );
