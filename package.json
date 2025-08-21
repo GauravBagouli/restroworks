@@ -1,0 +1,18 @@
+{
+  "name": "restroworks-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:cms": "npm run dev --workspace @restroworks/cms",
+    "dev:web": "npm run dev --workspace @restroworks/web",
+    "dev": "npm run dev:cms & npm run dev:web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  },
+  "dependencies": {
+    "@payloadcms/richtext-lexical": "^3.52.0"
+  }
+}
