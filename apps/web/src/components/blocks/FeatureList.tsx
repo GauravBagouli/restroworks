@@ -6,7 +6,7 @@ export default function FeatureList({ block, locale }: { block: any, locale: str
   return (
     <section className="py-16 text-center bg-gray-50 text-gray-800">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl font-bold mb-10">Features</h2>
+        <h2 className="text-3xl font-bold mb-10">{block.title}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
           {block.features.map((feature: any, i: number) => (
             <div

@@ -7,7 +7,7 @@ export default function TestimonialList({ block }: { block: any }) {
     <section className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6 text-center">
         <h2 className="text-4xl font-bold text-gray-900">
-          What Our Customers Say
+          {block.title}
         </h2>
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {block.testimonials.map((t: any, i: number) => (

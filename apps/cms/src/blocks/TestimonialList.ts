@@ -4,6 +4,7 @@ const TestimonialList: Block = {
   slug: "testimonialList",
   labels: { singular: "Testimonial List", plural: "Testimonial Lists" },
   fields: [
+    { name: "title", type: "text", required: true, localized: true, },
     {
       name: "testimonials",
       type: "array",

@@ -203,12 +203,14 @@ export interface Page {
             blockType: 'hero';
           }
         | {
+            title: string;
             features: (string | Feature)[];
             id?: string | null;
             blockName?: string | null;
             blockType: 'featureList';
           }
         | {
+            title: string;
             testimonials?:
               | {
                   quote: string;
@@ -441,6 +443,7 @@ export interface PagesSelect<T extends boolean = true> {
         featureList?:
           | T
           | {
+              title?: T;
               features?: T;
               id?: T;
               blockName?: T;
@@ -448,6 +451,7 @@ export interface PagesSelect<T extends boolean = true> {
         testimonialList?:
           | T
           | {
+              title?: T;
               testimonials?:
                 | T
                 | {
