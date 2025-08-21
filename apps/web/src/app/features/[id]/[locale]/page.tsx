@@ -1,8 +1,7 @@
 import Image from "next/image";
 import RichTextRenderer from "@/components/RichText";
 import Link from "next/link";
-import { isLocale, DEFAULT_LOCALE, LOCALES, type Locale } from "@/i18n/config";
-import type { Metadata } from "next";
+import { isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 
 const CMS = process.env.NEXT_PUBLIC_CMS_URL;
 
@@ -18,43 +17,6 @@ async function getFeature(id: string, locale: Locale) {
   }
 
   return res.json();
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string; locale: string };
-}): Promise<Metadata> {
-  const { id, locale: rawLocale } = params;
-  const locale = isLocale(rawLocale) ? (rawLocale as Locale) : DEFAULT_LOCALE;
-
-  const feature = await getFeature(id, locale);
-
-  if (!feature) {
-    return {
-      title: "404 - Feature Not Found",
-      description: "The feature you are looking for does not exist.",
-    };
-  }
-
-  const languages: Record<string, string> = {};
-  LOCALES.forEach((loc) => {
-    languages[loc] = `/feature/${id}/${loc}`;
-  });
-
-  return {
-    title: feature.metaTitle || feature.title,
-    description: feature.metaDescription || feature.description || "",
-    openGraph: {
-      title: feature.metaTitle || feature.title,
-      description: feature.metaDescription || feature.description || "",
-      images: feature.metaImage ? [{ url: feature.metaImage.url }] : [],
-    },
-    alternates: {
-      canonical: `/feature/${id}/${locale}`,
-      languages,
-    },
-  };
 }
 
 export default async function FeatureDetail({
