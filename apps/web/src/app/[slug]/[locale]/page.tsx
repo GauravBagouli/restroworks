@@ -82,15 +82,15 @@ export default async function HomePage(props: { params: Promise<{ locale: string
     <main>
       <section className="relative overflow-hidden">
 
-        <div className="absolute inset-0 -z-10 overflow-hidden">
+        {page.slug == "home" && <div className="absolute inset-0 -z-10 overflow-hidden">
           <div
             className="HomepageHeroGradient w-[150%] h-[150%] absolute left-[-25%] bottom-0
             bg-[linear-gradient(270deg,#a960ee,#ff333d,#90e0ff,#ffcb57,#a960ee)]
             bg-[length:300%_300%] animate-gradient"
           />
-        </div>
+        </div>}
         
-        <div className="pb-32 pt-20 text-center text-white">
+        <div className={`pb-32 pt-20 ${page.slug == "home" ? "text-white text-center": "text-gray-800"}`}>
           <div className="max-w-3xl mx-auto px-6">
             <h1 className="text-4xl font-bold text-gray-900">{page.title}</h1>
             {page.content && (
