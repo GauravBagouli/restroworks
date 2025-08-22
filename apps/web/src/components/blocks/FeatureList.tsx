@@ -76,7 +76,7 @@ export default function FeatureList({ block, locale }: { block: any, locale: str
                 >
                   <Image
                     src={feature.icon.url}
-                    alt={feature.icon.alt || ""}
+                    alt={feature.icon.alt || "icon"}
                     width={64}
                     height={64}
                     priority

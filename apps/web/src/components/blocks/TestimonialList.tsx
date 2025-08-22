@@ -44,7 +44,7 @@ export default function TestimonialList({ block }: { block: any }) {
                   >
                     <Image
                       src={t.avatar.url}
-                      alt={t.avatar.alt || ""}
+                      alt={t.avatar.alt || "customer"}
                       width={50}
                       height={50}
                       priority

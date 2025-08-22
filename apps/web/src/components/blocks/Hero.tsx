@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import RichTextRenderer from "../RichText";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef } from "react";
 
-export default function Hero({ block }: { block: any }) {
+export default function Hero({ block, locale }: { block: any, locale: string }) {
+  console.log('locale', locale)
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -24,7 +25,7 @@ export default function Hero({ block }: { block: any }) {
   return (
     <section ref={ref} className="relative py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <motion.div style={{ y: textY, opacity: textOpacity, scale: textScale }}>
+        <motion.div key={locale} style={{ y: textY, opacity: textOpacity, scale: textScale }}>
           {block.eyebrow && (
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -36,15 +37,18 @@ export default function Hero({ block }: { block: any }) {
               {block.eyebrow}
             </motion.p>
           )}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ amount: 0.3 }}
-            transition={{ delay: 0.2 }}
-            className="mt-3 text-5xl font-extrabold text-gray-900 leading-tight"
-          >
-            {block.headline}
-          </motion.h1>
+          <AnimatePresence mode="wait">
+            <motion.h1
+              key={locale}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="mt-3 text-4xl font-extrabold text-gray-900 leading-tight"
+            >
+              {block.headline}
+            </motion.h1>
+          </AnimatePresence>
 
           {block.description && (
             <motion.div
@@ -81,7 +85,7 @@ export default function Hero({ block }: { block: any }) {
           >
             <Image
               src={block.image.url}
-              alt={block.image.alt || ""}
+              alt={block.image.alt || "block image"}
               width={block.image.width || 500}
               height={block.image.height || 500}
               priority
