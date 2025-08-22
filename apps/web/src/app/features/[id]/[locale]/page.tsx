@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { use } from "react";
 import RichTextRenderer from "@/components/RichText";
 import { SerializedEditorState } from "lexical";
 import Link from "next/link";
@@ -43,9 +42,9 @@ async function getFeature(id: string, locale: Locale) {
 export default function FeatureDetail({
   params,
 }: {
-  params: Promise<{ id: string; locale: string }>;
+  params: { id: string; locale: string };
 }) {
-    const { id, locale: rawLocale } = use(params);;
+    const { id, locale: rawLocale } = params;
     const locale = isLocale(rawLocale) ? (rawLocale as Locale) : DEFAULT_LOCALE;
 
     const [feature, setFeature] = useState<Feature | null>(null);

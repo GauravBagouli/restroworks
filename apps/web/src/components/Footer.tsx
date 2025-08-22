@@ -1,8 +1,13 @@
+import type { Locale } from "@/i18n/config";
 
-export default function Footer() {
+interface FooterProps {
+  locale: Locale;
+}
+
+export default function Footer({ locale }: FooterProps) {
   return (
     <footer className="bg-gray-900 text-gray-300 py-8">
-      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div key={locale} className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
         <p>&copy; {new Date().getFullYear()} Restroworks. All rights reserved.</p>
         <nav className="space-x-6">
           <a href="https://www.restroworks.com/privacy-policy/" className="hover:text-white">

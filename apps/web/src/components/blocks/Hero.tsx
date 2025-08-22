@@ -4,8 +4,27 @@ import Image from "next/image";
 import RichTextRenderer from "../RichText";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef } from "react";
+import { SerializedEditorState } from "lexical";
 
-export default function Hero({ block, locale }: { block: any, locale: string }) {
+export type HeroBlock = {
+  id?: string | number;
+  blockType: "hero";
+  eyebrow?: string;
+  headline: string;
+  description?: SerializedEditorState;
+  primaryCta?: {
+    href: string;
+    label: string;
+  };
+  image?: {
+    url: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+  };
+};
+
+export default function Hero({ block, locale }: { block: HeroBlock, locale: string }) {
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({

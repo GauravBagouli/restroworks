@@ -1,8 +1,11 @@
 import { redirect } from "next/navigation";
 import { DEFAULT_LOCALE } from "@/i18n/config";
 
-export default function RedirectPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+interface RedirectParams {
+  params: Promise<{ slug: string }>;
+}
 
-  return redirect(`/${slug}/${DEFAULT_LOCALE}`);
+export default async function RedirectPage({ params }: RedirectParams) {
+  const { slug } = await params;
+  redirect(`/${slug}/${DEFAULT_LOCALE}`);
 }

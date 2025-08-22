@@ -15,15 +15,32 @@ const validationMessages: Record<string, (label?: string) => string> = {
     `${label || "This field"} has an invalid value.`,
 };
 
-export function handleApiError(error: any): string {
+type ValidationError = {
+  message: string;
+  label?: string;
+  path?: string;
+};
+
+type ApiError = {
+  message?: string;
+  errors?: {
+    data?: {
+      errors?: ValidationError[];
+    };
+  }[];
+};
+
+
+export function handleApiError(error: unknown): string {
   try {
-    if (error?.errors?.length > 0) {
-      const nestedErrors = error.errors.flatMap(
-        (err: any) => err?.data?.errors || []
-      );
+    const err = error as ApiError;
+    if (err?.errors?.length) {
+      const nestedErrors =
+        err.errors.flatMap((e) => e.data?.errors ?? []) ?? [];
+
       if (nestedErrors.length > 0) {
         return nestedErrors
-          .map((e: any) => {
+          .map((e) => {
             const msgFn = validationMessages[e.message];
             return msgFn
               ? msgFn(e.label || e.path)
@@ -33,13 +50,14 @@ export function handleApiError(error: any): string {
       }
     }
 
-    if (error?.message) {
-      const msgFn = validationMessages[error.message];
-      return msgFn ? msgFn() : error.message;
+    if (err?.message) {
+      const msgFn = validationMessages[err.message];
+      return msgFn ? msgFn() : err.message;
     }
 
     return "Something went wrong. Please try again.";
   } catch (e) {
+    console.error(e);
     return "Unexpected error occurred.";
   }
 }

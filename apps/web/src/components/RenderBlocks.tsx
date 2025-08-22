@@ -9,10 +9,22 @@ type BaseBlock = {
   blockType: "hero" | "featureList" | "testimonialList" | "cta";
 };
 
-export type HeroBlock = BaseBlock & {
+export type HeroBlock = {
+  id?: string | number;
   blockType: "hero";
-  title: string;
-  subtitle?: string;
+  eyebrow?: string;
+  headline: string;
+  description?: SerializedEditorState;
+  primaryCta?: {
+    href: string;
+    label: string;
+  };
+  image?: {
+    url: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+  };
 };
 
 export type FeatureListBlock = BaseBlock & {
@@ -29,9 +41,21 @@ export type FeatureListBlock = BaseBlock & {
   }[];
 };
 
-export type TestimonialListBlock = BaseBlock & {
+export type Testimonial = {
+  quote: string;
+  author: string;
+  role?: string;
+  avatar?: {
+    url: string;
+    alt?: string;
+  };
+};
+
+export type TestimonialListBlock = {
+  id?: string | number;
   blockType: "testimonialList";
-  testimonials: { quote: string; author: string }[];
+  title: string;
+  testimonials: Testimonial[];
 };
 
 export type CTABlock = BaseBlock & {

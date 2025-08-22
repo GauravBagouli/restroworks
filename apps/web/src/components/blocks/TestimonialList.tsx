@@ -3,7 +3,24 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function TestimonialList({ block }: { block: any }) {
+export type Testimonial = {
+  quote: string;
+  author: string;
+  role?: string;
+  avatar?: {
+    url: string;
+    alt?: string;
+  };
+};
+
+export type TestimonialListBlock = {
+  id?: string | number;
+  blockType: "testimonialList";
+  title: string;
+  testimonials: Testimonial[];
+};
+
+export default function TestimonialList({ block }: { block: TestimonialListBlock }) {
   if (!block.testimonials?.length) return null;
 
   return (
@@ -13,7 +30,7 @@ export default function TestimonialList({ block }: { block: any }) {
           {block.title}
         </h2>
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {block.testimonials.map((t: any, i: number) => (
+          {block.testimonials.map((t, i) => (
             <motion.div
               key={i}
               className="cursor-zoom-in p-8 rounded-xl shadow-md flex flex-col gap-4 text-left bg-white relative overflow-hidden"
