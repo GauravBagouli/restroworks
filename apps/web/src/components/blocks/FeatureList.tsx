@@ -2,23 +2,39 @@
 
 import Image from "next/image";
 import RichTextRenderer from "@/components/RichText";
+import { SerializedEditorState } from "lexical";
 import { motion, useScroll, useTransform } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { useRef } from "react";
 
-export default function FeatureList({ block, locale }: { block: any, locale: string; }) {
-  if (!block.features?.length) return null;
+type Feature = {
+  id?: string | number;
+  title?: string;
+  description: string;
+  icon?: { url: string; alt?: string };
+  link?: string;
+  link_label?: string;
+};
 
-  const ref = useRef(null);
+type FeatureListBlock = {
+  title?: string;
+  description?: SerializedEditorState;
+  features: Feature[];
+};
 
+export default function FeatureList({ block, locale }: { block: FeatureListBlock, locale: string; }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-
+  
   const sectionY = useTransform(scrollYProgress, [0, 1], [40, -40]);
   const sectionScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, 0.85]);
   const sectionOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
+  
+  if (!block.features?.length) return null;
 
   const containerVariants: Variants = {
     hidden: { opacity: 1 },
@@ -61,7 +77,7 @@ export default function FeatureList({ block, locale }: { block: any, locale: str
           viewport={{ once: true, amount: 0.3 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8"
         >
-          {block.features.map((feature: any, i: number) => (
+          {block.features.map((feature: Feature, i: number) => (
             <motion.div
               key={feature.id || i}
               className="p-6 rounded-xl shadow-md border border-gray-200 bg-white hover:shadow-lg transition"

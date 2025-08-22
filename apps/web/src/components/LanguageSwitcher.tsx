@@ -32,7 +32,7 @@ export default function LanguageSwitcher({ current }: { current: Locale }) {
     setCurrentLocalVal(
       isLocale(segments[0]) ? (segments[0] as Locale) : current
     );
-  }, []);
+  }, [current, segments]);
 
   function switchTo(nextLocale: Locale) {
     setCurrentLocalVal(nextLocale);

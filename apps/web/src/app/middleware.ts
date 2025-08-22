@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { LOCALES, DEFAULT_LOCALE, isLocale } from "@/i18n/config";
+import { DEFAULT_LOCALE, isLocale } from "@/i18n/config";
 
 const PUBLIC_FILES = [
   "/favicon.ico", "/robots.txt", "/sitemap.xml", "/manifest.json",

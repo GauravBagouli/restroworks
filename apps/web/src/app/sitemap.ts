@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { isLocale, DEFAULT_LOCALE, LOCALES } from "@/i18n/config";
+import { LOCALES } from "@/i18n/config";
 
 const CMS = process.env.NEXT_PUBLIC_CMS_URL;
 

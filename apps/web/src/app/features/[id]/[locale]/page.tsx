@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { use } from "react";
 import RichTextRenderer from "@/components/RichText";
+import { SerializedEditorState } from "lexical";
 import Link from "next/link";
 import { isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { motion } from "framer-motion";
@@ -10,6 +11,20 @@ import type { Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const CMS = process.env.NEXT_PUBLIC_CMS_URL;
+
+type FeatureImage = {
+  image?: { url: string; alt?: string };
+  caption?: string;
+};
+
+type Feature = {
+  id: string;
+  title: string;
+  description?: string;
+  content?: SerializedEditorState;
+  icon?: { url: string; alt?: string };
+  images?: FeatureImage[];
+};
 
 async function getFeature(id: string, locale: Locale) {
   const res = await fetch(
@@ -33,7 +48,7 @@ export default function FeatureDetail({
     const { id, locale: rawLocale } = use(params);;
     const locale = isLocale(rawLocale) ? (rawLocale as Locale) : DEFAULT_LOCALE;
 
-    const [feature, setFeature] = useState<any>(null);
+    const [feature, setFeature] = useState<Feature | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -122,7 +137,7 @@ export default function FeatureDetail({
         </motion.div>
       )}
 
-      {feature.images?.length > 0 && (
+      {feature.images && feature.images?.length > 0 && (
         <motion.div 
           className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-8"
           initial="hidden"
@@ -134,7 +149,7 @@ export default function FeatureDetail({
             },
           }}
         >
-          {feature.images.map((img: any, i: number) =>
+          {feature.images.map((img: FeatureImage, i: number) =>
             img.image?.url ? (
               <motion.figure
                 key={i}

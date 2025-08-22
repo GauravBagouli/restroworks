@@ -2,7 +2,6 @@ import RenderBlocks from "@/components/RenderBlocks";
 import RichTextRenderer from "@/components/RichText";
 import { isLocale, DEFAULT_LOCALE, LOCALES, type Locale } from "@/i18n/config";
 import ContactPage from "@/components/blocks/Contact";
-import FeaturesPage from "@/components/blocks/FeaturePage";
 import type { Metadata } from "next";
 
 const CMS = process.env.NEXT_PUBLIC_CMS_URL;

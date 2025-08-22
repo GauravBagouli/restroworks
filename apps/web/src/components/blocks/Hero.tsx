@@ -6,7 +6,6 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useRef } from "react";
 
 export default function Hero({ block, locale }: { block: any, locale: string }) {
-  console.log('locale', locale)
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({
