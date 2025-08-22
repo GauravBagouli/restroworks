@@ -12,7 +12,5 @@
   "devDependencies": {
     "concurrently": "^9.0.0"
   },
-  "dependencies": {
-    "@payloadcms/richtext-lexical": "^3.52.0"
-  }
+  "dependencies": {}
 }

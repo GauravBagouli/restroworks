@@ -8,6 +8,7 @@ import { isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { useEffect, useState } from "react";
+import { use } from "react";
 
 const CMS = process.env.NEXT_PUBLIC_CMS_URL;
 
@@ -42,9 +43,9 @@ async function getFeature(id: string, locale: Locale) {
 export default function FeatureDetail({
   params,
 }: {
-  params: { id: string; locale: string };
+  params: Promise<{ id: string; locale: string }>;
 }) {
-    const { id, locale: rawLocale } = params;
+    const { id, locale: rawLocale } = use(params);
     const locale = isLocale(rawLocale) ? (rawLocale as Locale) : DEFAULT_LOCALE;
 
     const [feature, setFeature] = useState<Feature | null>(null);

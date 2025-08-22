@@ -25,7 +25,7 @@ export type HeroBlock = {
 };
 
 export default function Hero({ block, locale }: { block: HeroBlock, locale: string }) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: ref,
