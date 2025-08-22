@@ -204,6 +204,21 @@ export interface Page {
           }
         | {
             title: string;
+            description?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
             features: (string | Feature)[];
             id?: string | null;
             blockName?: string | null;
@@ -444,6 +459,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
+              description?: T;
               features?: T;
               id?: T;
               blockName?: T;

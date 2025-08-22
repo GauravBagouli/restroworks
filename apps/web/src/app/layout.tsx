@@ -11,7 +11,7 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col bg-white text-gray-900">{children}</body>
+      <body className="min-h-screen flex flex-col text-gray-900">{children}</body>
     </html>
   );
 }

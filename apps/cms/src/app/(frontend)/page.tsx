@@ -25,6 +25,7 @@ export default async function HomePage() {
             height={65}
             src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
             width={65}
+            priority
           />
         </picture>
         {!user && <h1>Welcome to your new project.</h1>}

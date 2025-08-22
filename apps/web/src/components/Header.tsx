@@ -1,36 +1,3 @@
-// import Image from "next/image";
-// import Link from "next/link";
-
-// export default function Header() {
-//   return (
-//     <header className="bg-white shadow sticky top-0 z-50">
-//       <div className="max-w-7xl mx-auto p-4 flex justify-between items-center">
-//         {/* Logo */}
-//         <Image
-//           src="https://www.restroworks.com/wp-content/uploads/2023/09/restroworks-logo.png"
-//           alt="Restroworks Logo"
-//           width={120}
-//           height={40}
-//           className="mr-2"
-//         />
-
-//         {/* Nav */}
-//         <nav className="space-x-6">
-//           <Link href="/home" className="text-gray-700 hover:text-blue-600">
-//             Home
-//           </Link>
-//           <Link href="/contact" className="text-gray-700 hover:text-blue-600">
-//             Contact
-//           </Link>
-//           <Link href="/about" className="text-gray-700 hover:text-blue-600">
-//             About
-//           </Link>
-//         </nav>
-//       </div>
-//     </header>
-//   );
-// }
-
 "use client";
 
 import Link from "next/link";
@@ -51,6 +18,7 @@ export default function Header({ locale }: { locale: Locale }) {
             alt="Restroworks Logo"
             width={120}
             height={40}
+            priority
             className="mr-2"
           />
         </Link>
@@ -62,7 +30,7 @@ export default function Header({ locale }: { locale: Locale }) {
               pathname?.includes("/features") ? "font-semibold" : ""
             }`}
           >
-            Features
+            {locale === "en" ? "Features" : "Características"}
           </Link>
           <Link
             href={`/contact/${locale}`}
@@ -70,7 +38,7 @@ export default function Header({ locale }: { locale: Locale }) {
               pathname?.includes("/contact") ? "font-semibold" : ""
             }`}
           >
-            Contact
+            {locale === "en" ? "Contact" : "Contato"}
           </Link>
 
           <LanguageSwitcher current={locale} />

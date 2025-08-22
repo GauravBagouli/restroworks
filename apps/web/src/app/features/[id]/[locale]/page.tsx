@@ -39,6 +39,7 @@ export default async function FeatureDetail({
           alt={feature.icon.alt || ""}
           width={128}
           height={128}
+          priority
           className="mx-auto"
         />
       )}
@@ -66,6 +67,7 @@ export default async function FeatureDetail({
                   alt={img.image.alt || ""}
                   width={600}
                   height={400}
+                  priority
                   className="w-full h-64 object-cover rounded-lg shadow-md"
                 />
                 {img.caption && (

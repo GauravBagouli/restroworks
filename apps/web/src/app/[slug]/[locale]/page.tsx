@@ -22,12 +22,8 @@ async function getHome(locale: Locale, slug: string) {
   return data.docs?.[0];
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { locale: string; slug: string };
-}): Promise<Metadata> {
-  const { slug, locale: rawLocale } = params;
+export async function generateMetadata(props: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { slug, locale: rawLocale } = await props.params;
   const locale = isLocale(rawLocale) ? (rawLocale as Locale) : DEFAULT_LOCALE;
   const safeSlug = slug || "home";
 
@@ -61,12 +57,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function HomePage({
-  params,
-}: {
-  params: { locale: string; slug: string };
-}) {
-  const { slug, locale: rawLocale } = params;
+export default async function HomePage(props: { params: Promise<{ locale: string; slug: string }> }) {
+  const { slug, locale: rawLocale } = await props.params;
 
   const locale = isLocale(rawLocale) ? (rawLocale as Locale) : DEFAULT_LOCALE;
   const safeSlug = slug || "home";
@@ -79,19 +71,34 @@ export default async function HomePage({
   }
 
   if (page.slug === "features") {
-    return (<FeaturesPage params={params} />);
+    return (
+      <main>
+        <RenderBlocks layout={page.layout} locale={locale} />
+      </main>
+    );
   }
 
   return (
     <main>
-      <section className="bg-gray-50 py-16 text-center">
-        <div className="max-w-3xl mx-auto px-6">
-          <h1 className="text-4xl font-bold text-gray-900">{page.title}</h1>
-          {page.content && (
-            <div className="mt-4 text-lg text-gray-600">
-              <RichTextRenderer content={page.content} />
-            </div>
-          )}
+      <section className="relative overflow-hidden">
+
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <div
+            className="HomepageHeroGradient w-[150%] h-[150%] absolute left-[-25%] bottom-0
+            bg-[linear-gradient(270deg,#a960ee,#ff333d,#90e0ff,#ffcb57,#a960ee)]
+            bg-[length:300%_300%] animate-gradient"
+          />
+        </div>
+        
+        <div className="pb-32 pt-20 text-center text-white">
+          <div className="max-w-3xl mx-auto px-6">
+            <h1 className="text-4xl font-bold text-gray-900">{page.title}</h1>
+            {page.content && (
+              <div className="mt-4 text-lg opacity-90">
+                <RichTextRenderer content={page.content} />
+              </div>
+            )}
+          </div>
         </div>
       </section>
 

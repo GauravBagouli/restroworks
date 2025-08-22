@@ -9,37 +9,29 @@ function AlternateLinks({ locale, path }: { locale: Locale; path: string }) {
   return (
     <>
       {LOCALES.map((l) => (
-        <link
-          key={l}
-          rel="alternate"
-          hrefLang={l}
-          href={`/${l}${tidy}`}
-        />
+        <link key={l} rel="alternate" hrefLang={l} href={`${tidy}`} />
       ))}
-      <link rel="alternate" hrefLang="x-default" href={`/${DEFAULT_LOCALE}${tidy}`} />
+      <link rel="alternate" hrefLang="x-default" href={`${tidy}`} />
     </>
   );
 }
 
-export default function FeatureLayout({
+export default async function FeatureLayout({
   params,
   children,
 }: {
-  params: { id: string; locale: string };
+  params: Promise<{ id: string; locale: string }>;
   children: ReactNode;
 }) {
-  const locale = isLocale(params.locale) ? (params.locale as Locale) : DEFAULT_LOCALE;
+  const { id, locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? (rawLocale as Locale) : DEFAULT_LOCALE;
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <head>
-        <AlternateLinks locale={locale} path={`/features/${params.id}/${locale}`} />
-      </head>
-      <body className="min-h-screen flex flex-col bg-white text-gray-900">
-        <Header locale={locale} />
-        <main className="flex-1">{children}</main>
-        <Footer locale={locale} />
-      </body>
-    </html>
+    <>
+      <AlternateLinks locale={locale} path={`/features/${id}/${locale}`} />
+      <Header locale={locale} />
+      <main className="flex-1">{children}</main>
+      <Footer locale={locale} />
+    </>
   );
 }
