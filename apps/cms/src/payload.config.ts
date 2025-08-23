@@ -15,8 +15,8 @@ const __dirname = path.dirname(__filename)
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
   secret: process.env.PAYLOAD_SECRET!,
-  cors: ['http://localhost:3001', 'http://localhost:3000'],
-  csrf: ['http://localhost:3001'],
+  cors: [process.env.WEB_ORIGIN || 'http://localhost:3000'],
+  csrf: [process.env.WEB_ORIGIN || 'http://localhost:3000'],
   admin: {
     user: 'users',
     meta: {
