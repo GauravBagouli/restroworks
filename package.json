@@ -5,7 +5,7 @@
     "apps/*"
   ],
   "scripts": {
-    "dev:cms": "npm run dev --workspace @restroworks/cms",
+    "dev:cms": "npm run dev:local --workspace @restroworks/cms",
     "dev:web": "npm run dev --workspace @restroworks/web",
     "dev": "npm run dev:cms & npm run dev:web"
   },
