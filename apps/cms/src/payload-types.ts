@@ -90,14 +90,8 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {
-    'site-settings': SiteSetting;
-    'seo-defaults': SeoDefault;
-  };
-  globalsSelect: {
-    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
-    'seo-defaults': SeoDefaultsSelect<false> | SeoDefaultsSelect<true>;
-  };
+  globals: {};
+  globalsSelect: {};
   locale: 'en' | 'es';
   user: User & {
     collection: 'users';
@@ -590,64 +584,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "site-settings".
- */
-export interface SiteSetting {
-  id: string;
-  nav?:
-    | {
-        label: string;
-        href: string;
-        id?: string | null;
-      }[]
-    | null;
-  footerText?: string | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "seo-defaults".
- */
-export interface SeoDefault {
-  id: string;
-  siteName: string;
-  defaultTitle: string;
-  defaultDescription?: string | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "site-settings_select".
- */
-export interface SiteSettingsSelect<T extends boolean = true> {
-  nav?:
-    | T
-    | {
-        label?: T;
-        href?: T;
-        id?: T;
-      };
-  footerText?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "seo-defaults_select".
- */
-export interface SeoDefaultsSelect<T extends boolean = true> {
-  siteName?: T;
-  defaultTitle?: T;
-  defaultDescription?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

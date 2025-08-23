@@ -28,9 +28,14 @@ const ContactSubmissions: CollectionConfig = {
     {
       name: "phone",
       type: "text",
-      minLength: 10,
-      maxLength: 15,
       required: false,
+      validate: (value: string | null | undefined) => {
+        if (!value) return true;
+        if (!/^\d+$/.test(value)) return "Phone must contain only digits";
+        if (value.length < 10) return "Phone must be at least 10 digits";
+        if (value.length > 15) return "Phone must be at most 15 digits";
+        return true;
+      },
     },
     {
       name: "honey",
