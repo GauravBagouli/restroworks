@@ -76,7 +76,7 @@ I designed the CMS with a few guiding principles:
 
 ## Working With Pages & Blocks
 
-###  Creating a Page
+### Creating a Page
 
 1. Go to **Pages** in the CMS admin.
 2. Click  **Create New Page** .
@@ -86,7 +86,7 @@ I designed the CMS with a few guiding principles:
    * **Slug** → determines the URL (e.g. `/home`).
    * **Layout Blocks** → add as many as you want (hero, features, cta, etc.).
 
-###  Editing a Page
+### Editing a Page
 
 * Open an existing page, adjust blocks, save → instantly reflects on the frontend after reload.
 
@@ -112,7 +112,4 @@ I designed the CMS with a few guiding principles:
 ## Live Demo Link
 
 For a quick overview of the CMS and frontend workflow, please check out the demo video:
-[View Demo Video
-
-
-](https://drive.google.com/file/d/1z1OVL0FF1Xzax9r3vO4RDeIJRIzUzr0H/view "Demo Link")
+[View Demo Video](https://drive.google.com/file/d/1z1OVL0FF1Xzax9r3vO4RDeIJRIzUzr0H/view)
