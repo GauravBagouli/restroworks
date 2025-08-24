@@ -108,3 +108,11 @@ I designed the CMS with a few guiding principles:
 - CMS requires MongoDB
 - Web can be deployed to Vercel/Render or any serverless deployement services.
 - CMS can be deployed as node js application on services like Render.
+
+## Live Demo Link
+
+For a quick overview of the CMS and frontend workflow, please check out the demo video:
+[View Demo Video
+
+
+](https://drive.google.com/file/d/1z1OVL0FF1Xzax9r3vO4RDeIJRIzUzr0H/view "Demo Link")
